@@ -1,0 +1,51 @@
+---
+
+export interface Props {
+	componentType?: 'astro' | 'react'
+}
+
+const { componentType = 'astro' } = Astro.props;
+---
+
+<a href="#"
+    class="bg-cyan-500 text-white rounded-lg p-2 mb-10"
+    data-name="toggle-button">Toggle to {componentType !== 'react' ? 'React' : 'Astro'} video component</a
+>
+
+<script>
+	document.addEventListener("astro:page-load", () => {
+		const buttons = document.querySelectorAll('[data-name="toggle-button"]');
+
+		for (let button of buttons)
+			button.addEventListener("click", function (e) {
+				e.preventDefault();
+				if (localStorage.component_type === "react") {
+					localStorage.component_type = 'astro'
+					button.innerHTML = 'Toggle to React video component'
+					document.querySelector('[data-component="astro"]')?.classList.remove("hidden");
+					document.querySelector('[data-component="react"]')?.classList.add("hidden");
+				}
+				else {
+					localStorage.component_type = 'react'
+					button.innerHTML = 'Toggle to Astro video component'
+					document.querySelector('[data-component="react"]')?.classList.remove("hidden");
+					document.querySelector('[data-component="astro"]')?.classList.add("hidden");
+				} 
+			});
+	});
+</script>
+
+<script>
+	document.addEventListener("astro:after-swap", () => {
+		const buttons = document.querySelectorAll('[data-name="toggle-button"]');
+
+		if (localStorage.component_type === "react") {
+			document.querySelector('[data-component="react"]')?.classList.remove("hidden");
+			document.querySelector('[data-component="astro"]')?.classList.add("hidden");
+			for (let button of buttons) button.innerHTML = 'Toggle to Astro video component'
+
+		} else {
+			for (let button of buttons) button.innerHTML = 'Toggle to React video component'
+		}
+	});
+</script>

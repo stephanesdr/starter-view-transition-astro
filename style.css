@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::view-transition-old(root) {
+    display: none;
+    animation: none;
+}
+
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+@media (prefers-reduced-motion) {
+    ::view-transition-old(*),
+    ::view-transition-new(*) {
+      animation: none !important;
+    }
+  }

@@ -1,0 +1,37 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Video from "../components/Video.astro";
+import VideoReact from "../components/VideoReact.tsx";
+import ToggleButton from "../components/ToggleButton.astro";
+
+const componentType: any = 'astro';
+---
+
+<Layout>
+    <ToggleButton componentType={componentType} />
+
+    <a href="/" class="block w-full mt-36 px-20">
+        <div data-component="react"
+            class:list={[{'hidden': componentType !== 'react'}]}>
+            <h1 class="text-white text-2xl mb-4" transition:name="main-title">React video component</h1>
+            <VideoReact
+                client:load
+                title="Mon titre"
+                titleSize={"4xl"}
+                transition:name="component-react"
+                transition:persist
+            />
+        </div>
+
+        <div data-component="astro"
+            class:list={[{hidden: componentType === 'react'}]}>
+            <h1 class="text-white text-2xl mb-4" transition:name="main-title">Astro video component</h1>
+            <Video
+                title="Mon titre"
+                titleSize={"4xl"}
+                transition:name="component-astro"
+                transition:persist
+            />
+        </div>
+    </a>
+</Layout>

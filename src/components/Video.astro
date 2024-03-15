@@ -1,0 +1,31 @@
+---
+export interface Props {
+    title?: string;
+    titleSize: "lg" | "xl" | "2xl" | "4xl";
+}
+
+const { title = "MyTitle", titleSize } = Astro.props;
+---
+
+<h2
+    class={`text-white text-${titleSize}`}
+    transition:name="title"
+>
+    {title}
+</h2>
+
+<video
+    class="w-full mt-4"
+    autoplay
+    muted
+    loop
+    transition:name="video"
+    transition:persist
+   
+>
+    <source
+        src="https://ia804502.us.archive.org/33/items/GoldenGa1939_3/GoldenGa1939_3_512kb.mp4"
+        type="video/mp4"
+    />
+    
+</video> 
